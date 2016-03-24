@@ -1,0 +1,55 @@
+<snippet>
+  <content><![CDATA[
+get '/${1:}' do
+  @${1:} = ${2:}.all
+  erb :'${1:}/index'
+end
+
+get '/${1:}/new' do
+  erb :'${1:}/new'
+end
+
+post '/${1:}' do
+  @${1:}${3:} = ${2:}.new(params[:${1:${3:}}])
+
+  if @${1:}${3:}.save
+    redirect '/${1:}'
+  else
+    erb :errors
+  end
+end
+
+get '/${1:}/:id' do
+  @${1:}${3:} = ${2:}.find(params[:id])
+  erb :'${1:}/show'
+end
+
+get '/${1:}/:id/edit' do
+  @${1:}${3:} = ${2:}.find(params[:id])
+  erb :'${1:}/edit'
+end
+
+put '/${1:}/:id' do
+  @${1:}${3:} = ${2:}.find(params[:id])
+
+  @${1:}${3:}.assign_attributes(params[:${1:}${3:}])
+
+  if @${1:}${3:}.save
+    redirect '/${1:}'
+  else
+    erb :errors
+  end
+end
+
+delete '/${1:}/:id' do
+  @${1:}${3:} = ${2:}.find(params[:id])
+  @${1:}${3:}.destroy
+
+  redirect '/${1:}'
+end
+]]></content>
+  <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+  <tabTrigger>rest</tabTrigger>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope>source.python</scope> -->
+</snippet>
